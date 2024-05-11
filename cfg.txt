@@ -1,0 +1,9 @@
+1
+50
+~/truchnt/local/cp/template.cpp
+
+cpp
+g++ $%full%$ -o $%file%$
+./$%file%$
+rm ./$%file%$
+y
