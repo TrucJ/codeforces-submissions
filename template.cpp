@@ -47,9 +47,6 @@ void sangnt()
 }
 int main()
 {
-    if (fopen("trucj.inp", "r"))
-        freopen("trucj.inp", "r", stdin),
-            freopen("trucj.out", "w", stdout);
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);

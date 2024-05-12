@@ -1,6 +1,6 @@
 1
 50
-~/truchnt/local/cp/template.cpp
+~/truchnt/github/codeforces-submissions/template.cpp
 
 cpp
 g++ $%full%$ -o $%file%$
