@@ -12,7 +12,7 @@
 #define PQ priority_queue
 #define MAX 200005
 #define INF 1000000009
-#define BASE 998244353
+#define BASE_MOD 1e9 + 7
 #define For(_, m, n) for (int _ = m; _ <= n; _++)
 #define Rev(_, m, n) for (int _ = m; _ >= n; _--)
 using namespace std;
@@ -44,6 +44,33 @@ void sangnt()
             for (int j = 2 * i; j < MAX; j += i)
                 IsPrime[j] = 0;
         }
+}
+#define MATRIX_SIZE 2
+void matrix_multiply(ll matrix1[][MATRIX_SIZE], ll matrix2[][MATRIX_SIZE], ll result[][MATRIX_SIZE])
+{
+    for (int i = 0; i < MATRIX_SIZE; ++i)
+        for (int j = 0; j < MATRIX_SIZE; ++j)
+        {
+            result[i][j] = 0;
+            for (int k = 0; k < MATRIX_SIZE; ++k)
+            {
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
+                result[i][j] /= BASE_MOD;
+            }
+        }
+}
+void matrix_power(ll matrix[][MATRIX_SIZE], int n, ll result[][MATRIX_SIZE])
+{
+    ll tmp[MATRIX_SIZE][MATRIX_SIZE];
+    matrix_power(matrix, n / 2, tmp);
+    if (n % 2)
+    {
+        ll tmp_power_2[MATRIX_SIZE][MATRIX_SIZE];
+        matrix_multiply(tmp, tmp, tmp_power_2);
+        matrix_multiply(tmp_power_2, matrix, result);
+    }
+    else
+        matrix_multiply(tmp, tmp, result);
 }
 int main()
 {
