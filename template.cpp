@@ -12,9 +12,9 @@
 #define PQ priority_queue
 #define MAX 200005
 #define INF 1000000009
-#define BASE_MOD 1e9 + 7
 #define For(_, m, n) for (int _ = m; _ <= n; _++)
 #define Rev(_, m, n) for (int _ = m; _ >= n; _--)
+const ll BASE_MOD = 1e9 + 7;
 using namespace std;
 void reset();
 void solve();
@@ -55,12 +55,19 @@ void matrix_multiply(ll matrix1[][MATRIX_SIZE], ll matrix2[][MATRIX_SIZE], ll re
             for (int k = 0; k < MATRIX_SIZE; ++k)
             {
                 result[i][j] += matrix1[i][k] * matrix2[k][j];
-                result[i][j] /= BASE_MOD;
+                result[i][j] %= BASE_MOD;
             }
         }
 }
-void matrix_power(ll matrix[][MATRIX_SIZE], int n, ll result[][MATRIX_SIZE])
+void matrix_power(ll matrix[][MATRIX_SIZE], ll n, ll result[][MATRIX_SIZE])
 {
+    if (n == 0)
+    {
+        for (int i = 0; i < MATRIX_SIZE; ++i)
+            for (int j = 0; j < MATRIX_SIZE; ++j)
+                result[i][j] = i == j ? 1 : 0;
+        return;
+    }
     ll tmp[MATRIX_SIZE][MATRIX_SIZE];
     matrix_power(matrix, n / 2, tmp);
     if (n % 2)
