@@ -2,34 +2,53 @@ import sys
 import os
 from bs4 import BeautifulSoup
 
+def is_html(content):
+    """
+    Check if the content is HTML.
+    """
+    return bool(BeautifulSoup(content, "html.parser").find())
+
 def html_to_txt(input_folder):
-    for file in os.listdir(input_folder):
-        if not file.startswith("in") or not file.endswith(".txt"):
+    """
+    Convert HTML to text.
+    """
+    # Loop through all children in the input folder.
+    for child in os.listdir(input_folder):
+        path_child = os.path.join(input_folder, child)
+
+        # If the child is a directory, recursively call html_to_txt.
+        if os.path.isdir(path_child):
+            html_to_txt(path_child)
             continue
-        input_file = os.path.join(input_folder, file)
-        
-        print("Translating file", input_file)
 
-        # Đọc nội dung của file HTML
-        with open(input_file, "r") as file:
-            html_content = file.read()
+        # Skip files that do not start with "in" or end with ".txt".
+        if not child.endswith(".txt"):
+            continue
 
-        # Phân tích HTML sử dụng BeautifulSoup
-        soup = BeautifulSoup(html_content, "html.parser")
+        print("Translating file", path_child)
 
-        # Trích xuất văn bản từ các thẻ div và ghi vào file văn bản
-        with open(input_file, "w") as output:
+        # Read the content of the file.
+        with open(path_child, "r") as file:
+            content = file.read()
+
+        # Skip the file if the content is not HTML.
+        if not is_html(content):
+            continue
+
+        # Parse the HTML content using BeautifulSoup.
+        soup = BeautifulSoup(content, "html.parser")
+
+        # Extract text from div tags and write to the same file.
+        with open(path_child, "w") as output:
             for div in soup.find_all("div"):
                 output.write(div.text.strip() + "\n")
 
 if __name__ == "__main__":
-    # Kiểm tra số lượng tham số dòng lệnh
+    # Check the number of command line arguments.
     if len(sys.argv) != 2:
-        print("Sử dụng: python script.py input_folder")
-        sys.exit(1)
+        input_folder = "cf/contest"
+    else:
+        input_folder = sys.argv[1]
 
-    # Lấy tên thư mục đầu vào từ tham số dòng lệnh
-    input_folder = sys.argv[1]
-
-    # Chuyển đổi HTML thành văn bản
+    # Convert HTML to text.
     html_to_txt(input_folder)
