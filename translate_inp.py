@@ -25,8 +25,6 @@ def html_to_txt(input_folder):
         if not child.endswith(".txt"):
             continue
 
-        print("Translating file", path_child)
-
         # Read the content of the file.
         with open(path_child, "r") as file:
             content = file.read()
@@ -34,6 +32,8 @@ def html_to_txt(input_folder):
         # Skip the file if the content is not HTML.
         if not is_html(content):
             continue
+
+        print("Translating file", path_child)
 
         # Parse the HTML content using BeautifulSoup.
         soup = BeautifulSoup(content, "html.parser")
