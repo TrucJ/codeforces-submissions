@@ -107,26 +107,14 @@ void solve()
 {
     cin >> n >> l >> r;
     for (int i = 0; i < n; i++)
-    {
         cin >> a[i];
-    }
-    ll i, j;
-    i = 0;
-    j = 0;
-    ll s = 0;
-    ll cnt = 0;
+    ll i = 0, j = 0, s = 0, cnt = 0;
     while (j < n || r < s)
     {
         if (s < l)
-        {
-            s += a[j];
-            j++;
-        }
+            s += a[j++];
         else if (r < s)
-        {
-            s -= a[i];
-            i++;
-        }
+            s -= a[i++];
 
         if (l <= s && s <= r)
         {

@@ -108,11 +108,8 @@ void solve()
     while (k)
     {
         if (x == 1)
-        {
             k %= y - 1;
-        }
-        ll r = x % y;
-        ll d = y - r;
+        ll d = y - x % y;
         if (d > k)
         {
             x += k;
@@ -122,9 +119,7 @@ void solve()
         k -= d;
         x += d;
         while (x % y == 0)
-        {
             x /= y;
-        }
     }
     cout << x;
 }
