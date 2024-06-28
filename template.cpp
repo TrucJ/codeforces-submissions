@@ -80,6 +80,16 @@ void matrix_power(ll matrix[][MATRIX_SIZE], ll n, ll result[][MATRIX_SIZE])
     else
         matrix_multiply(tmp, tmp, result);
 }
+int lcs(string X, string Y, int m, int n)
+{
+    if (m == 0 || n == 0)
+        return 0;
+    if (X[m - 1] == Y[n - 1])
+        return 1 + lcs(X, Y, m - 1, n - 1);
+    else
+        return max(lcs(X, Y, m, n - 1),
+                   lcs(X, Y, m - 1, n));
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
