@@ -22,8 +22,9 @@ __/\\\\\\\\\\\\\\\____________________________________________/\\\\\\\\\\\_
 #include <utility>
 #define ll long long
 #define II pair<int, int>
+#define llll pair<ll, ll>
 #define PQ priority_queue
-#define MAX 2e5 + 5
+#define MAX int(2e5 + 5)
 #define INF 1000000009
 #define For(_, m, n) for (int _ = m; _ <= n; _++)
 #define Rev(_, m, n) for (int _ = m; _ >= n; _--)
