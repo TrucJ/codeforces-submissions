@@ -48,16 +48,18 @@ ll Pow(ll a, ll n)
     return res * res * Pow(a, n % 2);
 }
 bool IsPrime[MAX];
+int MinDivisorPrime[MAX];
 void sangnt()
 {
     for (int i = 2; i < MAX; i++)
         IsPrime[i] = 1;
-    for (int i = 0; i < MAX; i++)
+    for (ll i = 0; i < MAX; i++)
         if (IsPrime[i])
-        {
-            for (int j = 2 * i; j < MAX; j += i)
+            for (ll j = i * i; j < MAX; j += i)
+            {
                 IsPrime[j] = 0;
-        }
+                MinDivisorPrime[j] = i;
+            }
 }
 #define MATRIX_SIZE 2
 void matrix_multiply(ll matrix1[][MATRIX_SIZE], ll matrix2[][MATRIX_SIZE], ll result[][MATRIX_SIZE])
