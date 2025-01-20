@@ -1,9 +1,0 @@
-1
-50
-~/truchnt/github/codeforces-submissions/template.cpp
-
-cpp
-g++ $%full%$ -o $%file%$
-./$%file%$
-rm ./$%file%$
-y
